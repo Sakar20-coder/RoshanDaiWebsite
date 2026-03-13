@@ -57,7 +57,7 @@
 
 .service-card {
   display: block;
-  background: #ffffff;
+  background: #ebeff4;
   border-radius: 15px;
   padding: 25px;
   text-decoration: none;
@@ -677,6 +677,46 @@ img{
   font-size: 13px;
   color: var(--gray);
   margin-top: 4px;
+}
+
+/* HERO IMAGE */
+
+.hero-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.hero-right img {
+  width: 100%;
+  max-width: 550px;
+  height: auto;
+
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+
+  opacity: 0;
+  transform: translateX(80px);
+  animation: heroSlideFade 1.2s ease forwards;
+}
+
+
+
+/* slide + fade animation */
+
+@keyframes heroSlideFade {
+
+  0%{
+    opacity: 0;
+    transform: translateX(80px);
+  }
+
+  100%{
+    opacity: 1;
+    transform: translateX(0);
+  }
+
 }
 
 /* ======================== ABOUT SECTION ======================== */
