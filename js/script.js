@@ -11,26 +11,34 @@ async function loadComponents() {
 
     try {
 
+        // Detect correct path depending on page location
+        let path = "";
+
+        if (window.location.pathname.includes("/services/") || 
+            window.location.pathname.includes("/Pages/")) {
+            path = "../";
+        }
+
         if (header) {
-            const res = await fetch("../components/header.html");
+            const res = await fetch(path + "components/header.html");
             const data = await res.text();
             header.innerHTML = data;
         }
 
         if (footer) {
-            const res = await fetch("../components/footer.html");
+            const res = await fetch(path + "components/footer.html");
             const data = await res.text();
             footer.innerHTML = data;
         }
 
         initializeNavbar();
+        initializeMobileDropdown();
 
     } catch (error) {
         console.error("Component loading error:", error);
     }
 
 }
-
 
 
 
@@ -108,12 +116,20 @@ function initializeNavbar() {
 }
 
 
-    // MOBILE DROPDOWN TOGGLE
-    document.querySelectorAll(".mobile-dropdown > a").forEach(menu => {
+// MOBILE DROPDOWN TOGGLE
+function initializeMobileDropdown() {
+
+    const menus = document.querySelectorAll(".mobile-dropdown > a");
+
+    menus.forEach(menu => {
+
         menu.addEventListener("click", e => {
+
             e.preventDefault();
             menu.parentElement.classList.toggle("active");
+
         });
+
     });
 
-
+}
