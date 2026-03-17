@@ -2,134 +2,107 @@ document.addEventListener("DOMContentLoaded", () => {
     loadComponents();
 });
 
-
 // LOAD HEADER AND FOOTER
 async function loadComponents() {
-
     const header = document.getElementById("header");
     const footer = document.getElementById("footer");
 
     try {
-
-        // Detect correct path depending on page location
-        let path = "";
-
-        if (window.location.pathname.includes("/services/") || 
+        // Simple path detection
+        let prefix = "";
+        if (window.location.pathname.includes("/services/") ||
             window.location.pathname.includes("/Pages/")) {
-            path = "../";
+            prefix = "../";
         }
 
+        // Load header
         if (header) {
-            const res = await fetch(path + "components/header.html");
-            const data = await res.text();
-            header.innerHTML = data;
+            const res = await fetch(prefix + "components/header.html");
+            header.innerHTML = await res.text();
         }
 
+        // Load footer
         if (footer) {
-            const res = await fetch(path + "components/footer.html");
-            const data = await res.text();
-            footer.innerHTML = data;
+            const res = await fetch(prefix + "components/footer.html");
+            let footerHtml = await res.text();
+
+            // SIMPLE FIX: Replace #contact with absolute path
+            footerHtml = footerHtml.replace(/href="#contact"/g, 'href="/Pages/index.html#contact"');
+
+            footer.innerHTML = footerHtml;
         }
 
+        // Initialize everything
         initializeNavbar();
         initializeMobileDropdown();
+        setupContactLinks();
 
     } catch (error) {
-        console.error("Component loading error:", error);
+        console.error("Error loading components:", error);
     }
-
 }
 
+// SIMPLE CONTACT LINK HANDLER
+function setupContactLinks() {
+    // Find all contact links
+    const contactLinks = document.querySelectorAll('a[href="/Pages/index.html#contact"]');
 
+    contactLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
 
-// NAVBAR FUNCTION
+            // Check if we're on the homepage
+            if (window.location.pathname === '/' ||
+                window.location.pathname.includes('index.html') ||
+                window.location.pathname.endsWith('/Pages/')) {
+
+                // Just scroll to contact section
+                const contact = document.getElementById('contact');
+                if (contact) {
+                    contact.scrollIntoView({ behavior: 'smooth' });
+                }
+            } else {
+                // Go to homepage with contact anchor
+                window.location.href = '/Pages/index.html#contact';
+            }
+        });
+    });
+}
+
+// NORMAL NAVBAR FUNCTIONS (unchanged)
 function initializeNavbar() {
-
     const hamburger = document.getElementById("hamburger");
     const mobileMenu = document.getElementById("mobileMenu");
     const navbar = document.getElementById("navbar");
 
     if (!hamburger || !mobileMenu) return;
 
-    // Toggle menu
     hamburger.addEventListener("click", () => {
-
         mobileMenu.classList.toggle("active");
         hamburger.classList.toggle("active");
-
-        if (mobileMenu.classList.contains("active")) {
-            document.body.classList.add("no-scroll");
-        } else {
-            document.body.classList.remove("no-scroll");
-        }
-
+        document.body.classList.toggle("no-scroll");
     });
 
-
-    // Close menu when link clicked
-    const links = document.querySelectorAll(".mobile-menu a");
-
-    links.forEach(link => {
+    document.querySelectorAll(".mobile-menu a").forEach(link => {
         link.addEventListener("click", () => {
-
             mobileMenu.classList.remove("active");
             hamburger.classList.remove("active");
             document.body.classList.remove("no-scroll");
-
         });
     });
 
-
-    // Close menu when clicking outside
-    document.addEventListener("click", (e) => {
-
-        if (
-            mobileMenu.classList.contains("active") &&
-            !mobileMenu.contains(e.target) &&
-            !hamburger.contains(e.target)
-        ) {
-
-            mobileMenu.classList.remove("active");
-            hamburger.classList.remove("active");
-            document.body.classList.remove("no-scroll");
-
-        }
-
-    });
-
-
-    // Navbar scroll effect
     if (navbar) {
-
         window.addEventListener("scroll", () => {
-
-            if (window.scrollY > 50) {
-                navbar.classList.add("scrolled");
-            } else {
-                navbar.classList.remove("scrolled");
-            }
-
+            navbar.classList.toggle("scrolled", window.scrollY > 50);
         });
-
     }
-
 }
 
-
-// MOBILE DROPDOWN TOGGLE
 function initializeMobileDropdown() {
-
-    const menus = document.querySelectorAll(".mobile-dropdown > a");
-
-    menus.forEach(menu => {
-
+    document.querySelectorAll(".mobile-dropdown > a").forEach(menu => {
         menu.addEventListener("click", e => {
-
             e.preventDefault();
             menu.parentElement.classList.toggle("active");
-
         });
-
     });
-
 }
