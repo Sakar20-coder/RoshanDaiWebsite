@@ -1559,7 +1559,7 @@ img {
 
 .service-page {
   background: #ffffff;
-  padding: 80px 20px;
+  padding: 60px 0px;
 }
 
 
@@ -1577,7 +1577,7 @@ img {
 }
 
 .service-header p {
-  max-width: 700px;
+  max-width: 850px;
   margin: auto;
   color: #5f6f73;
   line-height: 1.7;
@@ -1587,8 +1587,15 @@ img {
 /* CONTENT BLOCK */
 
 .service-block {
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
+
+
+
+.process-step {
+  margin-bottom: 16px;
+}
+
 
 .service-block h2 {
   font-size: 28px;
@@ -1700,145 +1707,265 @@ img {
 }
 
 
-/* ================= ABOUT SECTION ================= */
+/* ================================================
+   ABOUT PAGE STYLES — FinPro Advisors
+   Paste this at the bottom of your style.css,
+   replacing the existing about page blocks.
+   ================================================ */
+
+
+/* ================= ABOUT HERO — slide in on load ================= */
+
+.about-hero {
+  background: var(--offwhite);
+  padding: 90px 0;
+  text-align: center;
+  border-bottom: 1px solid #e8f0f4;
+  overflow: hidden;
+}
+
+.about-hero h1 {
+  font-family: var(--font-heading);
+  font-size: 42px;
+  color: var(--navy);
+  margin-bottom: 20px;
+  line-height: 1.2;
+
+  /* slide up from below on load */
+  opacity: 0;
+  transform: translateY(36px);
+  animation: heroSlideUp 2.75s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+}
+
+.about-hero p {
+  font-size: 17px;
+  max-width: 640px;
+  margin: 0 auto;
+  color: var(--gray);
+  line-height: 1.75;
+
+  opacity: 0;
+  transform: translateY(24px);
+  animation: heroSlideUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.28s forwards;
+}
+
+@keyframes heroSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ================= SCROLL FADE SYSTEM ================= */
+
+/* Base hidden state — add these classes in about.html */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fade-left {
+  opacity: 0;
+  transform: translateX(-48px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fade-right {
+  opacity: 0;
+  transform: translateX(48px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* JS adds .visible when element enters viewport */
+.fade-up.visible,
+.fade-left.visible,
+.fade-right.visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Stagger delays for grids of cards */
+.stagger-1 { transition-delay: 0.05s; }
+.stagger-2 { transition-delay: 0.15s; }
+.stagger-3 { transition-delay: 0.25s; }
+.stagger-4 { transition-delay: 0.35s; }
+
+
+/* ================= WHO WE ARE ================= */
 
 .about-section {
-  padding: 80px 0;
+  padding: 90px 0;
+  background: var(--white);
 }
 
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 50px;
+  gap: 64px;
   align-items: center;
 }
 
 .about-text h2 {
+  font-family: var(--font-heading);
   font-size: 32px;
+  color: var(--navy);
   margin-bottom: 20px;
-  color: #0f6f73;
 }
 
 .about-text p {
-  margin-bottom: 16px;
-  font-size: 16px;
+  font-size: 15.5px;
+  color: var(--gray);
+  line-height: 1.8;
+  margin-bottom: 14px;
+}
+
+.about-text p:last-child {
+  margin-bottom: 0;
 }
 
 .about-image img {
   width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 12px 36px rgba(14, 45, 69, 0.1);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.about-image img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 48px rgba(14, 45, 69, 0.14);
 }
 
 
 /* ================= MISSION & VISION ================= */
 
 .mission-vision {
-  background: #f8fbfb;
-  padding: 80px 0;
+  background: var(--offwhite);
+  padding: 90px 0;
 }
 
 .mission-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  gap: 32px;
 }
 
 .mission-box {
-  background: white;
-  padding: 35px;
-  border-radius: 8px;
-  border-top: 4px solid #19b4b8;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  background: var(--white);
+  padding: 36px;
+  border-radius: 10px;
+  border-top: 3px solid var(--teal);
+  box-shadow: 0 4px 18px rgba(14, 45, 69, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mission-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(14, 45, 69, 0.1);
 }
 
 .mission-box h3 {
-  margin-bottom: 15px;
-  color: #0f6f73;
+  font-family: var(--font-heading);
+  font-size: 20px;
+  color: var(--navy);
+  margin-bottom: 14px;
 }
 
 .mission-box p {
   font-size: 15px;
+  color: var(--gray);
+  line-height: 1.8;
 }
 
 
-/* ================= WHY CHOOSE US ================= */
+/* ================= WHY FINPRO ================= */
 
 .why-us {
-  padding: 80px 0;
+  padding: 90px 0;
+  background: var(--white);
   text-align: center;
 }
 
 .why-us h2 {
+  font-family: var(--font-heading);
   font-size: 32px;
-  margin-bottom: 40px;
-  color: #0f6f73;
+  color: var(--navy);
+  margin-bottom: 48px;
 }
 
 .why-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 25px;
+  gap: 24px;
 }
 
 .why-card {
-  background: white;
-  padding: 28px;
-  border-radius: 8px;
-  border-top: 3px solid #19b4b8;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  background: var(--offwhite);
+  padding: 28px 24px;
+  border-radius: 10px;
+  border-top: 3px solid var(--teal);
+  text-align: left;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .why-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 12px 28px rgba(14, 45, 69, 0.08);
 }
 
 .why-card h4 {
-  margin-bottom: 12px;
-  color: #0f6f73;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 10px;
 }
 
 .why-card p {
-  font-size: 15px;
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.7;
 }
 
 
-/* ================= CTA SECTION ================= */
+/* ================= CTA ================= */
 
 .about-cta {
-  background: #076063;
-  color: white;
+  background: var(--navy);
+  color: var(--white);
   padding: 80px 0;
   text-align: center;
 }
 
 .about-cta h2 {
-  font-size: 32px;
-  margin-bottom: 15px;
+  font-family: var(--font-heading);
+  font-size: 30px;
+  margin-bottom: 12px;
 }
 
 .about-cta p {
-  max-width: 650px;
-  margin: auto;
-  margin-bottom: 30px;
-  font-size: 17px;
+  font-size: 16px;
+  color: #8ab8cc;
+  margin-bottom: 32px;
 }
 
 .cta-button {
   display: inline-block;
-  background: white;
-  color: #086669;
-  padding: 14px 30px;
-  border-radius: 5px;
-  text-decoration: none;
+  background: var(--teal);
+  color: var(--white);
+  padding: 13px 30px;
+  border-radius: 8px;
   font-weight: 600;
-  transition: 0.3s;
+  font-size: 15px;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .cta-button:hover {
-  background: #e6f7f6;
+  background: var(--teal-light);
+  transform: translateY(-2px);
 }
 
 
@@ -1848,6 +1975,7 @@ img {
 
   .about-grid {
     grid-template-columns: 1fr;
+    gap: 40px;
   }
 
   .mission-grid {
@@ -1862,12 +1990,23 @@ img {
 
 @media (max-width: 600px) {
 
+  .about-hero h1 {
+    font-size: 30px;
+  }
+
+  .about-hero p {
+    font-size: 15px;
+  }
+
   .why-grid {
     grid-template-columns: 1fr;
   }
 
-  .about-hero h1 {
-    font-size: 30px;
+  .about-section,
+  .mission-vision,
+  .why-us,
+  .about-cta {
+    padding: 60px 0;
   }
 
 }
