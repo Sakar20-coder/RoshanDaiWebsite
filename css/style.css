@@ -2010,3 +2010,84 @@ img {
   }
 
 }
+
+
+/* ================= INDUSTRIES PAGE ================= */
+
+.industries-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+/* CARD */
+
+.industry-card {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 26px;
+  border-top: 4px solid var(--teal);
+
+  box-shadow: 0 6px 20px rgba(14, 45, 69, 0.06);
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.industry-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(14, 45, 69, 0.1);
+}
+
+/* TITLE */
+
+.industry-card h2 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: var(--navy);
+}
+
+/* TEXT */
+
+.industry-card p {
+  font-size: 14.5px;
+  color: var(--gray);
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+/* LIST */
+
+.industry-card ul {
+  padding-left: 18px;
+}
+
+.industry-card li {
+  font-size: 14px;
+  color: var(--gray);
+  margin-bottom: 6px;
+  position: relative;
+}
+
+/* subtle bullet style */
+
+.industry-card li::marker {
+  color: var(--teal);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 992px) {
+  .industries-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .industries-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
