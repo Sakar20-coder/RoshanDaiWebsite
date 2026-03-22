@@ -1,6 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
     loadComponents();
+    handlePageLoadHash(); // Check for hash on page load
+    initializeSmoothScrolling();
 });
+
+// Handle hash in URL when page loads
+function handlePageLoadHash() {
+    if (window.location.hash) {
+        const targetId = window.location.hash;
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+            // Small delay to ensure page is fully loaded
+            setTimeout(() => {
+                const navbar = document.getElementById('navbar');
+                const navbarHeight = navbar ? navbar.offsetHeight : 80;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }, 100);
+        }
+    }
+}
 
 // LOAD HEADER AND FOOTER
 async function loadComponents() {
@@ -35,35 +59,89 @@ async function loadComponents() {
         // Initialize everything
         initializeNavbar();
         initializeMobileDropdown();
-        setupContactLinks();
+        setupNavigationLinks(); // Updated function
+        initializeSmoothScrolling(); // Re-initialize after components load
+        handlePageLoadHash(); // Check again after components load
 
     } catch (error) {
         console.error("Error loading components:", error);
     }
 }
 
-// SIMPLE CONTACT LINK HANDLER
-function setupContactLinks() {
-    // Find all contact links
-    const contactLinks = document.querySelectorAll('a[href="/Pages/index.html#contact"]');
-
-    contactLinks.forEach(link => {
-        link.addEventListener('click', function (e) {
+// UPDATED: Handle both contact and services links across pages
+function setupNavigationLinks() {
+    // Handle Contact links
+    const contactLinks = document.querySelectorAll('a[href*="#contact"]');
+    const servicesLinks = document.querySelectorAll('a[href*="#services"]');
+    
+    // Function to handle cross-page navigation with scroll
+    function handleCrossPageLink(e, targetId) {
+        const currentPath = window.location.pathname;
+        const isOnHomepage = currentPath === '/' || 
+                            currentPath.includes('index.html') || 
+                            currentPath.endsWith('/Pages/');
+        
+        if (isOnHomepage) {
             e.preventDefault();
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                const navbar = document.getElementById('navbar');
+                const navbarHeight = navbar ? navbar.offsetHeight : 80;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                history.pushState(null, null, `#${targetId}`);
+            }
+        }
+        // If not on homepage, let the link navigate normally
+    }
+    
+    contactLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            handleCrossPageLink(e, 'contact');
+        });
+    });
+    
+    servicesLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            handleCrossPageLink(e, 'services');
+        });
+    });
+}
 
-            // Check if we're on the homepage
-            if (window.location.pathname === '/' ||
-                window.location.pathname.includes('index.html') ||
-                window.location.pathname.endsWith('/Pages/')) {
-
-                // Just scroll to contact section
-                const contact = document.getElementById('contact');
-                if (contact) {
-                    contact.scrollIntoView({ behavior: 'smooth' });
-                }
-            } else {
-                // Go to homepage with contact anchor
-                window.location.href = '/Pages/index.html#contact';
+// SMOOTH SCROLLING FUNCTION for same-page links
+function initializeSmoothScrolling() {
+    // Handle all anchor links that start with # (same page)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            
+            // Skip if it's just "#" or empty
+            if (targetId === '#' || targetId === '') return;
+            
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                e.preventDefault();
+                
+                // Get navbar height for offset
+                const navbar = document.getElementById('navbar');
+                const navbarHeight = navbar ? navbar.offsetHeight : 80;
+                
+                // Calculate target position with offset
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+                
+                // Smooth scroll to target
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Update URL without jumping
+                history.pushState(null, null, targetId);
             }
         });
     });

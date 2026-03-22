@@ -107,63 +107,6 @@
   text-decoration: underline;
 }
 
-/* Center the 7th card */
-.service-card:last-child {
-  grid-column: 2 / 3;
-}
-
-
-/* ================= GALLERY SCROLL ================= */
-
-.gallery-scroll {
-  position: relative;
-  overflow: hidden;
-  padding: 10px 20px;
-}
-
-.gallery-track {
-  display: flex;
-  gap: 25px;
-  width: 1200px;
-  animation: scrollGallery 25s linear infinite;
-}
-
-.gallery-container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 40px;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-}
-
-.gallery-item {
-  min-width: 200px;
-  flex-shrink: 0;
-  text-align: center;
-}
-
-.gallery-item img {
-  width: 200px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease;
-}
-
-.gallery-item img:hover {
-  transform: scale(1.05);
-}
-
-.gallery-item span {
-  display: block;
-  margin-top: 10px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #333;
-}
-
 
 /* ================= GALLERY ANIMATION ================= */
 
@@ -748,7 +691,7 @@ img {
 
 }
 
-/* ======================== ABOUT SECTION ======================== */
+/* ================= ABOUT SECTION UPDATED ================= */
 
 .about {
   padding: 100px 24px;
@@ -757,114 +700,93 @@ img {
 
 .about-inner {
   max-width: 1200px;
-  margin: auto;
+  margin: 0 auto;
+  width: min(1100px, 90%);
 }
 
-.section-label {
-  text-transform: uppercase;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--teal);
-  margin-bottom: 8px;
+/* About Header Styles */
+.about-header {
+  text-align: center;
+  margin-bottom: 3rem;
 }
 
-.section-title {
-  font-family: var(--font-heading);
-  font-size: 32px;
-  font-weight: 700;
-  color: var(--navy);
+.about-header .section-title {
+  margin-bottom: 24px;
+}
+
+.about-header .section-sub {
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* About Cards Grid - Matching Services Grid */
+.about-grid-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.about-card {
+  background: #ebeff4;
+  border-radius: 15px;
+  padding: 30px 25px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.about-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.about-card-icon {
+  font-size: 2.5rem;
   margin-bottom: 16px;
 }
 
-.section-sub {
-  font-size: 16px;
-  color: var(--gray);
-  line-height: 1.7;
-  margin-bottom: 32px;
-  max-width: 650px;
-}
-
-.about-points {
-  display: flex;
-  gap: 32px;
-  flex-wrap: wrap;
-  margin-bottom: 32px;
-}
-
-.about-point {
-  display: flex;
-  gap: 16px;
-  flex: 1 1 250px;
-}
-
-.point-icon {
-  font-size: 28px;
-  color: var(--teal);
-  flex-shrink: 0;
-}
-
-.point-text h4 {
-  font-size: 18px;
+.about-card h3 {
+  font-size: 20px;
+  color: #0e2d45;
+  margin-bottom: 12px;
   font-weight: 600;
-  margin-bottom: 6px;
-  color: var(--navy);
 }
 
-.point-text p {
-  font-size: 14.5px;
-  color: var(--gray);
+.about-card p {
+  font-size: 14px;
   line-height: 1.6;
+  color: #555;
+  margin: 0;
+}
+
+/* Centered Button Wrapper */
+.about-btn-wrapper {
+  text-align: center;
+  margin-top: 20px;
 }
 
 .about-btn {
   display: inline-block;
-  margin-top: 12px;
 }
 
-/* ======================== RESPONSIVE HERO & ABOUT ======================== */
-
-@media(max-width:1024px) {
-  .hero-inner {
-    flex-direction: column;
-    align-items: flex-start;
+/* Responsive for About Cards */
+@media (max-width: 768px) {
+  .about-grid-cards {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
-
-  .hero-shapes {
-    font-size: 80px;
+  
+  .about-card {
+    padding: 25px 20px;
   }
-}
-
-@media(max-width:768px) {
-  .hero h1 {
-    font-size: 32px;
-  }
-
-  .stat-card {
-    flex: 1 1 45%;
-    margin-bottom: 16px;
-  }
-
-  .about-point {
-    flex: 1 1 100%;
+  
+  .about-header .section-title {
+    margin-bottom: 20px;
   }
 }
-
-@media(max-width:480px) {
-  .hero h1 {
-    font-size: 26px;
-  }
-
-  .hero-shapes {
-    font-size: 60px;
-  }
-
-  .hero-btns {
-    flex-direction: column;
-    gap: 12px;
-  }
-}
-
-
 
 /* ======================== SUCCESS SECTION ======================== */
 .success-section {
@@ -1046,7 +968,6 @@ img {
   position: relative;
   overflow: hidden;
   padding: 0 40px;
-  /* space on left and right */
 }
 
 /* remove fade gradients completely */
@@ -1166,10 +1087,6 @@ img {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .service-card:last-child {
-    grid-column: auto;
-  }
-
 }
 
 @media (max-width: 768px) {
@@ -1275,7 +1192,6 @@ img {
 /* Stars */
 
 .stars {
-  color: var(--gold);
   font-size: 15px;
   letter-spacing: 2px;
   margin-bottom: 10px;
@@ -1345,10 +1261,6 @@ img {
     padding: 24px;
   }
 
-}
-
-:root {
-  --teal: #3a8fa3;
 }
 
 .contact-section {
@@ -1555,19 +1467,20 @@ img {
 
 }
 
-/* SERVICE PAGE */
+/* ================= SERVICE PAGE ================= */
 
 .service-page {
-  background: #ffffff;
+  background: #f5f9fb;
   padding: 60px 0px;
 }
-
 
 /* PAGE HEADER */
 
 .service-header {
   text-align: center;
   margin-bottom: 60px;
+  background: transparent;
+  padding: 0;
 }
 
 .service-header h1 {
@@ -1583,33 +1496,43 @@ img {
   line-height: 1.7;
 }
 
-
 /* CONTENT BLOCK */
 
 .service-block {
-  margin-bottom: 40px;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
 }
 
-
+.service-block:last-child {
+  margin-bottom: 0;
+}
 
 .process-step {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
   margin-bottom: 16px;
+  border-left: 3px solid var(--teal);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
 }
-
 
 .service-block h2 {
   font-size: 28px;
   color: #0f4f56;
-  margin-bottom: 18px;
-  border-left: 4px solid #58c6c4;
+  margin-bottom: 20px;
+  border-left: 4px solid var(--teal);
   padding-left: 12px;
 }
 
 .service-block h3 {
-  font-size: 20px;
-  margin-top: 24px;
-  margin-bottom: 8px;
+  font-size: 18px;
+  margin-top: 20px;
+  margin-bottom: 10px;
   color: #0f4f56;
+  font-weight: 600;
 }
 
 .service-block p {
@@ -1618,15 +1541,15 @@ img {
 }
 
 .service-block ul {
-  margin-top: 10px;
-  padding-left: 22px;
+  margin-top: 15px;
+  padding-left: 24px;
 }
 
 .service-block li {
-  margin-bottom: 6px;
+  margin-bottom: 10px;
   color: #566b70;
+  line-height: 1.6;
 }
-
 
 /* COMPANY TYPE CARDS */
 
@@ -1638,23 +1561,23 @@ img {
 }
 
 .type-card {
-  background: #f6fbfb;
-  border: 1px solid #e3f1f1;
+  background: #ffffff;
+  border: 1px solid #eef2f6;
   padding: 24px;
   border-radius: 10px;
   transition: 0.3s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .type-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
 .type-card h3 {
   margin-bottom: 10px;
   color: #0f4f56;
 }
-
 
 /* FEE TABLE */
 
@@ -1669,7 +1592,7 @@ img {
 }
 
 .fee-table th {
-  background: #58c6c4;
+  background: var(--teal);
   color: #fff;
   padding: 14px;
   text-align: left;
@@ -1684,37 +1607,67 @@ img {
   background: #f7fbfb;
 }
 
+/* ================= INDUSTRIES PAGE ================= */
+
+.industries-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+/* CARD */
+
+.industry-card {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 26px;
+  border-top: 4px solid var(--teal);
+  box-shadow: 0 6px 20px rgba(14, 45, 69, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.industry-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(14, 45, 69, 0.1);
+}
+
+/* TITLE */
+
+.industry-card h2 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: var(--navy);
+}
+
+/* TEXT */
+
+.industry-card p {
+  font-size: 14.5px;
+  color: var(--gray);
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+/* LIST */
+
+.industry-card ul {
+  padding-left: 18px;
+}
+
+.industry-card li {
+  font-size: 14px;
+  color: var(--gray);
+  margin-bottom: 6px;
+  position: relative;
+}
+
+/* subtle bullet style */
+
+.industry-card li::marker {
+  color: var(--teal);
+}
+
 /* ================= ABOUT HERO ================= */
-
-.about-hero {
-  background: #e6f7f6;
-  /* light teal */
-  padding: 90px 0;
-  text-align: center;
-}
-
-.about-hero h1 {
-  font-size: 42px;
-  margin-bottom: 20px;
-  color: #0f6f73;
-}
-
-.about-hero p {
-  font-size: 18px;
-  max-width: 750px;
-  margin: auto;
-  color: #444;
-}
-
-
-/* ================================================
-   ABOUT PAGE STYLES — FinPro Advisors
-   Paste this at the bottom of your style.css,
-   replacing the existing about page blocks.
-   ================================================ */
-
-
-/* ================= ABOUT HERO — slide in on load ================= */
 
 .about-hero {
   background: var(--offwhite);
@@ -1730,8 +1683,6 @@ img {
   color: var(--navy);
   margin-bottom: 20px;
   line-height: 1.2;
-
-  /* slide up from below on load */
   opacity: 0;
   transform: translateY(36px);
   animation: heroSlideUp 2.75s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
@@ -1743,7 +1694,6 @@ img {
   margin: 0 auto;
   color: var(--gray);
   line-height: 1.75;
-
   opacity: 0;
   transform: translateY(24px);
   animation: heroSlideUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.28s forwards;
@@ -1756,10 +1706,8 @@ img {
   }
 }
 
-
 /* ================= SCROLL FADE SYSTEM ================= */
 
-/* Base hidden state — add these classes in about.html */
 .fade-up {
   opacity: 0;
   transform: translateY(40px);
@@ -1781,7 +1729,6 @@ img {
               transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* JS adds .visible when element enters viewport */
 .fade-up.visible,
 .fade-left.visible,
 .fade-right.visible {
@@ -1789,12 +1736,10 @@ img {
   transform: translate(0, 0);
 }
 
-/* Stagger delays for grids of cards */
 .stagger-1 { transition-delay: 0.05s; }
 .stagger-2 { transition-delay: 0.15s; }
 .stagger-3 { transition-delay: 0.25s; }
 .stagger-4 { transition-delay: 0.35s; }
-
 
 /* ================= WHO WE ARE ================= */
 
@@ -1840,7 +1785,6 @@ img {
   box-shadow: 0 20px 48px rgba(14, 45, 69, 0.14);
 }
 
-
 /* ================= MISSION & VISION ================= */
 
 .mission-vision {
@@ -1880,7 +1824,6 @@ img {
   color: var(--gray);
   line-height: 1.8;
 }
-
 
 /* ================= WHY FINPRO ================= */
 
@@ -1930,7 +1873,6 @@ img {
   line-height: 1.7;
 }
 
-
 /* ================= CTA ================= */
 
 .about-cta {
@@ -1968,11 +1910,9 @@ img {
   transform: translateY(-2px);
 }
 
-
 /* ================= RESPONSIVE ================= */
 
 @media (max-width: 992px) {
-
   .about-grid {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -1985,11 +1925,24 @@ img {
   .why-grid {
     grid-template-columns: 1fr 1fr;
   }
+  
+  .industries-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
+@media (max-width: 768px) {
+  .service-page .container,
+  .service-page .section-inner {
+    padding: 0 20px;
+  }
+  
+  .service-block {
+    padding: 20px;
+  }
 }
 
 @media (max-width: 600px) {
-
   .about-hero h1 {
     font-size: 30px;
   }
@@ -2008,86 +1961,16 @@ img {
   .about-cta {
     padding: 60px 0;
   }
-
-}
-
-
-/* ================= INDUSTRIES PAGE ================= */
-
-.industries-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-}
-
-/* CARD */
-
-.industry-card {
-  background: var(--white);
-  border-radius: 14px;
-  padding: 26px;
-  border-top: 4px solid var(--teal);
-
-  box-shadow: 0 6px 20px rgba(14, 45, 69, 0.06);
-
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.industry-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 40px rgba(14, 45, 69, 0.1);
-}
-
-/* TITLE */
-
-.industry-card h2 {
-  font-size: 20px;
-  margin-bottom: 12px;
-  color: var(--navy);
-}
-
-/* TEXT */
-
-.industry-card p {
-  font-size: 14.5px;
-  color: var(--gray);
-  line-height: 1.7;
-  margin-bottom: 14px;
-}
-
-/* LIST */
-
-.industry-card ul {
-  padding-left: 18px;
-}
-
-.industry-card li {
-  font-size: 14px;
-  color: var(--gray);
-  margin-bottom: 6px;
-  position: relative;
-}
-
-/* subtle bullet style */
-
-.industry-card li::marker {
-  color: var(--teal);
-}
-
-/* ================= RESPONSIVE ================= */
-
-@media (max-width: 992px) {
-  .industries-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
+  
   .industries-grid {
     grid-template-columns: 1fr;
   }
+  
+  .service-header h1 {
+    font-size: 28px;
+  }
+  
+  .service-block h2 {
+    font-size: 22px;
+  }
 }
-
-
-
-
