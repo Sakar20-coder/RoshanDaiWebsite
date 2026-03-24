@@ -277,7 +277,7 @@ img {
 /* CTA button */
 
 .nav-cta {
-  background: var(--teal);
+  background: var(--teal-pale);
   color: white;
   border-radius: 8px;
 }
