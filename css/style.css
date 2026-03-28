@@ -639,30 +639,13 @@ img {
   background: var(--white);
   border-radius: var(--radius-lg);
   padding: 28px 26px;
-  text-decoration: none;
   color: inherit;
   transition: transform var(--transition), box-shadow var(--transition);
   border: 1px solid var(--gray-light);
   box-shadow: var(--shadow-sm);
   position: relative;
   overflow: hidden;
-}
-
-.service-card::after {
-  content: '→';
-  position: absolute;
-  bottom: 24px;
-  right: 26px;
-  font-size: 18px;
-  color: var(--teal);
-  opacity: 0;
-  transform: translateX(-8px);
-  transition: all var(--transition);
-}
-
-.service-card:hover::after {
-  opacity: 1;
-  transform: translateX(0);
+  cursor: default;
 }
 
 .service-card:hover {
